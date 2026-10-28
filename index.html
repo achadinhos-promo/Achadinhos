@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Achadinhos Prime</title>
-<meta name="description" content="Achadinhos selecionados do Mercado Livre. Veja as ofertas e compre direto no Mercado Livre.">
+<meta name="description" content="Achadinhos selecionados do Mercado Livre e da Shopee. Veja as ofertas e compre direto na loja.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
@@ -79,8 +79,8 @@ dialog .pimg img{width:100%;height:100%;object-fit:contain;background:#fff}
 
 <main class="wrap">
   <div class="hero">
-    <h1>Achadinhos selecionados do Mercado Livre</h1>
-    <p>Veja a oferta aqui e finalize a compra no Mercado Livre. Confira sempre o preço atual na página do produto.</p>
+    <h1>Achadinhos selecionados do Mercado Livre e da Shopee</h1>
+    <p>Veja a oferta aqui e finalize a compra na loja. Confira sempre o preço atual na página do produto.</p>
   </div>
   <nav class="chips" id="chips" aria-label="Categorias"></nav>
   <div id="sections"></div>
@@ -89,9 +89,9 @@ dialog .pimg img{width:100%;height:100%;object-fit:contain;background:#fff}
 <footer>
   <div class="wrap">
     <div class="logo">Achadinhos Prime</div>
-    <p><b>Aviso de afiliados:</b> este site usa links de afiliados. Posso receber uma comissão por compras elegíveis feitas por eles, sem custo extra para você. As compras são feitas no Mercado Livre, e os preços e a disponibilidade podem mudar a qualquer momento.</p>
+    <p><b>Aviso de afiliados:</b> este site usa links de afiliados. Posso receber uma comissão por compras elegíveis feitas por eles, sem custo extra para você. As compras são feitas no Mercado Livre ou na Shopee, e os preços e a disponibilidade podem mudar a qualquer momento.</p>
     <div class="links"><a href="#privacidade" data-open="privacidade">Privacidade</a><a href="#contato" data-open="contato">Contato</a></div>
-    <p>Este site não é afiliado oficial nem é operado pelo Mercado Livre.</p>
+    <p>Este site não é afiliado oficial nem é operado pelo Mercado Livre ou pela Shopee.</p>
   </div>
 </footer>
 
@@ -102,7 +102,7 @@ dialog .pimg img{width:100%;height:100%;object-fit:contain;background:#fff}
 /* ===== 1. CONFIGURAÇÃO — edite aqui ===== */
 var CONFIG = {
   contatoEmail: "seu-email@exemplo.com",   // troque pelo seu e-mail
-  instagram: "@achadinh0s_prime_"                  // troque pelo seu perfil
+  instagram: "@achadinh0s_prime_"
 };
 
 /* ===== 2. CATEGORIAS ===== */
@@ -116,39 +116,19 @@ var CATEGORIAS = [
   {id:"variadas", nome:"Ofertas variadas", icone:"🎁"}
 ];
 
-/* ===== 3. PRODUTOS — adicione os seus aqui =====
-Copie o modelo abaixo, cole dentro da lista e preencha com dados reais.
-{
-  id: "fone-bluetooth-x",          // sem espaços; vira o link compartilhável (#fone-bluetooth-x)
-  nome: "Nome do produto",
-  preco: 99.90,                    // preço atual verificado
-  precoAnterior: 129.90,           // opcional: só se for confirmado (senão apague a linha)
-  descricao: "Frase curta sobre o produto.",
-  categoria: "tecnologia",         // um id da lista de categorias
-  imagem: "",                      // opcional: ver README (precisa ser data: URI nesta hospedagem)
-  link: "COLE_AQUI_SEU_LINK_DE_AFILIADO",
-  destaque: true,                  // aparece em "Ofertas em destaque"
-  popular: false,                  // aparece em "Populares"
-  novo: false,                     // aparece em "Novidades"
-  publicado: true                  // false = esconde do site
-},
+/* ===== 3. PRODUTOS =====
+Para adicionar outro: coloque uma vírgula depois do último } e cole um novo bloco.
+O preço usa PONTO (59.60), nunca vírgula. Cada "id" precisa ser diferente.
 */
 var PRODUTOS = [
   {
     id: "kit-quadros-futebol",
     nome: "Kit 3 Quadros Futebol com LED",
-    preco: 59,60,
+    preco: 59.60,
     categoria: "casa",
     imagem: "quadros.jpg",
-    link: "https://meli.la/2Xr3ujX"
-  },
-  {
-    id: "produto-2",
-    nome: "Nome do produto 2",
-    preco: 0.00,
-    categoria: "variadas",
-    imagem: "foto2.jpg",
-    link: "LINK-DO-PRODUTO-2"
+    link: "https://meli.la/2Xr3ujX",
+    destaque: true
   }
 ];
 
@@ -183,7 +163,7 @@ function card(p){
   var c=catDe(p.categoria), d=desconto(p);
   var img = p.imagem ? '<img src="'+esc(p.imagem)+'" alt="'+esc(p.nome)+'" loading="lazy">' : '<span aria-hidden="true">'+c.icone+'</span>';
   var btn = linkOk(p.link)
-    ? '<a class="btn" href="'+esc(p.link)+'" target="_blank" rel="sponsored noopener noreferrer">Ver oferta no Mercado Livre</a>'
+    ? '<a class="btn" href="'+esc(p.link)+'" target="_blank" rel="sponsored noopener noreferrer">Ver oferta</a>'
     : '<button class="btn" data-open-prod="'+esc(p.id)+'">Ver detalhes</button>';
   return '<article class="card"><button class="img" data-open-prod="'+esc(p.id)+'" aria-label="Detalhes de '+esc(p.nome)+'">'+img+(d?'<span class="off">-'+d+'%</span>':'')+'</button>'+
     '<div class="body"><span class="cat">'+esc(c.nome)+'</span><h3 class="name">'+esc(p.nome)+'</h3>'+
@@ -202,7 +182,7 @@ function render(){
   var todos=validos();
   var out="";
   if(!todos.length){
-    out='<div class="empty"><b>Nenhum produto publicado ainda.</b><br>Abra o arquivo, procure a lista <code>PRODUTOS</code> e adicione o primeiro produto seguindo o modelo.</div>';
+    out='<div class="empty"><b>Nenhum produto publicado ainda.</b><br>Em breve novas ofertas por aqui.</div>';
   } else {
     var f=filtrar(todos);
     if(!f.length){
@@ -229,13 +209,13 @@ function abrirProduto(id){
   var img=p.imagem?'<img src="'+esc(p.imagem)+'" alt="'+esc(p.nome)+'">':'<span aria-hidden="true">'+c.icone+'</span>';
   abrir('<span class="cat">'+esc(c.nome)+'</span><h2 id="dt">'+esc(p.nome)+'</h2><div class="pimg">'+img+'</div>'+
     (d?'<span class="old">'+brl(p.precoAnterior)+'</span> <b>-'+d+'%</b><br>':'')+'<span class="price">'+brl(p.preco)+'</span>'+
-    '<p>'+esc(p.descricao||"")+'</p><p class="cat">Preço informado na data da publicação. Confira o valor atual no Mercado Livre.</p>'+
-    '<div class="row">'+(linkOk(p.link)?'<a class="btn" href="'+esc(p.link)+'" target="_blank" rel="sponsored noopener noreferrer">Ver oferta no Mercado Livre</a>':'')+
+    '<p>'+esc(p.descricao||"")+'</p><p class="cat">Preço informado na data da publicação. Confira o valor atual na loja.</p>'+
+    '<div class="row">'+(linkOk(p.link)?'<a class="btn" href="'+esc(p.link)+'" target="_blank" rel="sponsored noopener noreferrer">Ver oferta</a>':'')+
     '<button class="ico" data-share="'+esc(p.id)+'" aria-label="Compartilhar">↗</button></div>');
   return true;
 }
 function abrirPagina(k){
-  if(k==="privacidade") abrir('<h2 id="dt">Política de privacidade</h2><p>Este site não pede cadastro nem coleta dados pessoais por conta própria. Ao clicar em uma oferta, você vai para o Mercado Livre, que tem sua própria política de privacidade e pode usar cookies para registrar a origem do clique.</p><p>Se o site passar a usar ferramentas de estatística ou anúncios, esta página será atualizada.</p>');
+  if(k==="privacidade") abrir('<h2 id="dt">Política de privacidade</h2><p>Este site não pede cadastro nem coleta dados pessoais por conta própria. Ao clicar em uma oferta, você vai para a loja (Mercado Livre ou Shopee), que tem sua própria política de privacidade e pode usar cookies para registrar a origem do clique.</p><p>Se o site passar a usar ferramentas de estatística ou anúncios, esta página será atualizada.</p>');
   else abrir('<h2 id="dt">Contato</h2><p>Dúvidas, sugestões ou algum preço desatualizado?</p><p>E-mail: <a href="mailto:'+esc(CONFIG.contatoEmail)+'">'+esc(CONFIG.contatoEmail)+'</a><br>Instagram: '+esc(CONFIG.instagram)+'</p>');
 }
 function toast(t){var e=$("#toast");e.textContent=t;e.classList.add("on");setTimeout(function(){e.classList.remove("on")},1800)}
